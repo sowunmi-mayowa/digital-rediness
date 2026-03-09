@@ -1,0 +1,137 @@
+{
+  "languageSelection": {
+    "title": "Gwajin Shirye-shiryen Dijital",
+    "subtitle": "Zaɓi Harshenku",
+    "continue": "Ci gaba"
+  },
+  "landing": {
+    "title": "Gwajin Shirye-shiryen Dijital",
+    "subtitle": "Auna iyawar dijital da ilimin ku",
+    "startButton": "Fara Gwaji",
+    "features": {
+      "title": "Abin da Muke Aunawa",
+      "phoneSkills": "Ƙwarewar Waya",
+      "phoneSkillsDesc": "Amfani da wayar hannu na asali",
+      "internetKnowledge": "Ilimin Intanet",
+      "internetKnowledgeDesc": "Fahimtar sabis na kan layi",
+      "onlineSafety": "Aminci akan Layi",
+      "onlineSafetyDesc": "Kare asalin dijital ku",
+      "digitalPayments": "Biyan Kuɗi ta Dijital",
+      "digitalPaymentsDesc": "Ciniki mai aminci akan layi"
+    },
+    "howItWorks": {
+      "title": "Yadda Yake Aiki",
+      "step1": "Cika ayyukan waya masu sauƙi",
+      "step1Desc": "Gwada ƙwarewar wayar ku na asali",
+      "step2": "Amsa tambayoyin ilimin dijital",
+      "step2Desc": "Nuna sanin ku na dijital",
+      "step3": "Samu Maki na Shirye-shiryen Dijital",
+      "step3Desc": "Duba sakamakon ku da shawarwari"
+    }
+  },
+  "userInfo": {
+    "title": "Bayanin Ku",
+    "subtitle": "Faɗa mana game da kanku",
+    "name": "Suna (Ba dole ba)",
+    "namePlaceholder": "Shigar da sunan ku",
+    "ageRange": "Tsawon Shekaru",
+    "ageRangePlaceholder": "Zaɓi tsawon shekarun ku",
+    "educationLevel": "Matsayin Ilimi",
+    "educationLevelPlaceholder": "Zaɓi matsayin ilimin ku",
+    "location": "Wurin Zama",
+    "locationPlaceholder": "Shigar da wurin zaman ku",
+    "continue": "Ci gaba",
+    "ageRanges": {
+      "18-24": "Shekaru 18-24",
+      "25-34": "Shekaru 25-34",
+      "35-44": "Shekaru 35-44",
+      "45-54": "Shekaru 45-54",
+      "55+": "Shekaru 55+"
+    },
+    "educationLevels": {
+      "none": "Babu ilimi na tsari",
+      "primary": "Makarantar firamare",
+      "secondary": "Makarantar sakandare",
+      "tertiary": "Kwaleji/Jami'a",
+      "postgraduate": "Karatun digiri na biyu"
+    }
+  },
+  "tasks": {
+    "title": "Gwajin Ƙwarewar Aiki",
+    "task1": {
+      "title": "Gwajin Gungurawa",
+      "instruction": "Gungura ƙasa don nemo maɓallin Ci gaba"
+    },
+    "task2": {
+      "title": "Gwajin Daidaiton Dannawa",
+      "instruction": "Danna da'irar shuɗi"
+    },
+    "task3": {
+      "title": "Gwajin Kewayawa",
+      "instruction": "Buɗe fuska na Saƙonni"
+    },
+    "task4": {
+      "title": "Gwajin Mataki da Yawa",
+      "instruction": "Buɗe Saitunan kuma danna WiFi"
+    },
+    "task5": {
+      "title": "Cika Fom",
+      "instruction": "Shigar da shekarun ku kuma danna tura"
+    },
+    "continue": "Ci gaba",
+    "submit": "Tura",
+    "next": "Aiki na Gaba",
+    "taskComplete": "Aiki Ya Ƙare!",
+    "messages": "Saƙonni",
+    "camera": "Kyamara",
+    "settings": "Saitunan",
+    "wifi": "WiFi",
+    "bluetooth": "Bluetooth",
+    "display": "Nuni",
+    "ageLabel": "Shekarun Ku",
+    "agePlaceholder": "Shigar da shekarun ku"
+  },
+  "questions": {
+    "title": "Gwajin Ilimin Dijital",
+    "subtitle": "Amsa tambayoyin nan",
+    "questionOf": "Tambaya ta {{current}} daga cikin {{total}}",
+    "next": "Na gaba",
+    "finish": "Ƙare",
+    "submit": "Tura Amsa"
+  },
+  "results": {
+    "title": "Sakamakon Ku",
+    "scoreLabel": "Maki na Shirye-shiryen Dijital",
+    "level": "Matsayi",
+    "operational": "Ƙwarewar Aiki",
+    "knowledge": "Ilimin Dijital",
+    "strengths": "Ƙarfi",
+    "weaknesses": "Wuraren da Suke Buƙatar Ingantawa",
+    "recommendations": "Shawarwari",
+    "restart": "Yi Gwaji Sake",
+    "levels": {
+      "Beginner": "Mai Farawa",
+      "Basic": "Na Asali",
+      "Intermediate": "Matsakaici",
+      "Advanced": "Cigagge"
+    },
+    "strengthMessages": {
+      "navigation": "Ƙwarewar kewayawa mai kyau",
+      "speed": "Cika ayyuka da sauri",
+      "accuracy": "Daidaiton dannawa mai girma",
+      "knowledge": "Ƙaƙƙarfan ilimin dijital"
+    },
+    "weaknessMessages": {
+      "navigation": "Kewayawa yana buƙatar aiki",
+      "speed": "Ɗauki ƙarin lokaci don fahimtar ayyuka",
+      "accuracy": "Inganta daidaiton dannawa",
+      "knowledge": "Gina ilimin dijital"
+    },
+    "recommendationMessages": {
+      "beginner": "Fara da koyarwar waya na asali kuma yi aiki kowace rana",
+      "basic": "Ci gaba da aiki kuma koyi game da aminci akan layi",
+      "intermediate": "Bincika fasaloli masu ci gaba da biyan kuɗi ta dijital",
+      "advanced": "Taimaki wasu su koyi ƙwarewar dijital"
+    }
+  }
+}

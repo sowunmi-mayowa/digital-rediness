@@ -1,0 +1,137 @@
+{
+  "languageSelection": {
+    "title": "Ìdánwò Ìmúrasílẹ̀ Dígítà",
+    "subtitle": "Yan Èdè Rẹ",
+    "continue": "Tẹ̀síwájú"
+  },
+  "landing": {
+    "title": "Ìdánwò Ìmúrasílẹ̀ Dígítà",
+    "subtitle": "Wọn ọgbọ́n dígítà rẹ",
+    "startButton": "Bẹ̀rẹ̀ Ìdánwò",
+    "features": {
+      "title": "Ohun Tí A Ń Wọn",
+      "phoneSkills": "Ọgbọ́n Fóònù",
+      "phoneSkillsDesc": "Lílo fóònù àláìlágbára",
+      "internetKnowledge": "Ìmọ̀ Íńtánẹ́ẹ̀tì",
+      "internetKnowledgeDesc": "Òye nípa iṣẹ́ orí íńtánẹ́ẹ̀tì",
+      "onlineSafety": "Ààbò Lórí Íńtánẹ́ẹ̀tì",
+      "onlineSafetyDesc": "Dáàbò bo ìdánimọ̀ dígítà rẹ",
+      "digitalPayments": "Ìsanwó Dígítà",
+      "digitalPaymentsDesc": "Ìdúnàdúrà láìléwu lórí íńtánẹ́ẹ̀tì"
+    },
+    "howItWorks": {
+      "title": "Bí Ó Ṣe Ń Ṣiṣẹ́",
+      "step1": "Parí iṣẹ́-ṣíṣe fóònù tí ó rọrùn",
+      "step1Desc": "Dán ọgbọ́n fóònù rẹ wò",
+      "step2": "Dáhùn àwọn ìbéèrè ìmọ̀ dígítà",
+      "step2Desc": "Fi ìmọ̀ dígítà rẹ hàn",
+      "step3": "Gba Àmì Ìmúrasílẹ̀ Dígítà rẹ",
+      "step3Desc": "Wo èsì àti ìmọ̀ràn rẹ"
+    }
+  },
+  "userInfo": {
+    "title": "Àlàyé Rẹ",
+    "subtitle": "Sọ nípa ara rẹ fún wa",
+    "name": "Orúkọ (Kò pọn dandan)",
+    "namePlaceholder": "Tẹ orúkọ rẹ sínú",
+    "ageRange": "Ọjọ́ Orí",
+    "ageRangePlaceholder": "Yan ọjọ́ orí rẹ",
+    "educationLevel": "Ìpele Ẹ̀kọ́",
+    "educationLevelPlaceholder": "Yan ìpele ẹ̀kọ́ rẹ",
+    "location": "Ibùgbé",
+    "locationPlaceholder": "Tẹ ibùgbé rẹ sínú",
+    "continue": "Tẹ̀síwájú",
+    "ageRanges": {
+      "18-24": "Ọdún 18-24",
+      "25-34": "Ọdún 25-34",
+      "35-44": "Ọdún 35-44",
+      "45-54": "Ọdún 45-54",
+      "55+": "Ọdún 55+"
+    },
+    "educationLevels": {
+      "none": "Kò ní ẹ̀kọ́ ìlànà",
+      "primary": "Ilé-ìwé àkọ́kọ́",
+      "secondary": "Ilé-ìwé gíga",
+      "tertiary": "Kọ́lẹ́jì/Yunifásítì",
+      "postgraduate": "Ẹ̀kọ́ gíga"
+    }
+  },
+  "tasks": {
+    "title": "Ìdánwò Ọgbọ́n Iṣẹ́ṣiṣẹ",
+    "task1": {
+      "title": "Ìdánwò Yíyí",
+      "instruction": "Yí sísàlẹ̀ láti wá bọ́tìnì Tẹ̀síwájú"
+    },
+    "task2": {
+      "title": "Ìdánwò Ìtọ́ Déédéé",
+      "instruction": "Tẹ òbìdìdòbìrìkìtì búlúù náà"
+    },
+    "task3": {
+      "title": "Ìdánwò Lílo",
+      "instruction": "Ṣí ojú-ìwé Ifiránṣẹ́"
+    },
+    "task4": {
+      "title": "Ìdánwò Ìgbésẹ̀ Púpọ̀",
+      "instruction": "Ṣí Ètò kí o sì tẹ WiFi"
+    },
+    "task5": {
+      "title": "Pípé Fọ́ọ̀mù",
+      "instruction": "Tẹ ọjọ́ orí rẹ sínú kí o sì tẹ fífiránṣẹ́"
+    },
+    "continue": "Tẹ̀síwájú",
+    "submit": "Fíránṣẹ́",
+    "next": "Iṣẹ́-ṣíṣe Tókàn",
+    "taskComplete": "Iṣẹ́-ṣíṣe Pé!",
+    "messages": "Ifiránṣẹ́",
+    "camera": "Kámẹ́rà",
+    "settings": "Ètò",
+    "wifi": "WiFi",
+    "bluetooth": "Bluetooth",
+    "display": "Ìfihàn",
+    "ageLabel": "Ọjọ́ Orí Rẹ",
+    "agePlaceholder": "Tẹ ọjọ́ orí rẹ sínú"
+  },
+  "questions": {
+    "title": "Ìdánwò Ìmọ̀ Dígítà",
+    "subtitle": "Dáhùn àwọn ìbéèrè wọ̀nyí",
+    "questionOf": "Ìbéèrè {{current}} nínú {{total}}",
+    "next": "Tókàn",
+    "finish": "Parí",
+    "submit": "Fi Ìdáhùn Ránṣẹ́"
+  },
+  "results": {
+    "title": "Àwọn Èsì Rẹ",
+    "scoreLabel": "Àmì Ìmúrasílẹ̀ Dígítà",
+    "level": "Ìpele",
+    "operational": "Ọgbọ́n Iṣẹ́ṣiṣẹ",
+    "knowledge": "Ìmọ̀ Dígítà",
+    "strengths": "Agbára",
+    "weaknesses": "Àwọn Agbègbè Fún Ìmúdára",
+    "recommendations": "Ìmọ̀ràn",
+    "restart": "Ṣe Ìdánwò Lẹ́ẹ̀kan Sí i",
+    "levels": {
+      "Beginner": "Ẹni Ìbẹ̀rẹ̀",
+      "Basic": "Ìpìlẹ̀",
+      "Intermediate": "Ààrin",
+      "Advanced": "Àgbéléwọ̀"
+    },
+    "strengthMessages": {
+      "navigation": "Ọgbọ́n lílo tó dára",
+      "speed": "Pípé iṣẹ́-ṣíṣe ní kíákíá",
+      "accuracy": "Ìtọ́ tẹ gíga",
+      "knowledge": "Ìmọ̀ dígítà tó lágbára"
+    },
+    "weaknessMessages": {
+      "navigation": "Lílo nílò àdáṣe",
+      "speed": "Gba àkókò díẹ̀ síi láti lóye iṣẹ́-ṣíṣe",
+      "accuracy": "Mu ìtọ́ tẹ dára",
+      "knowledge": "Kọ́ ìmọ̀ dígítà"
+    },
+    "recommendationMessages": {
+      "beginner": "Bẹ̀rẹ̀ pẹ̀lú àwọn ẹ̀kọ́ fóònù ìpìlẹ̀ kí o sì máa ṣe àdáṣe lójoojúmọ́",
+      "basic": "Tẹ̀síwájú láti ṣe àdáṣe kí o sì kọ́ nípa ààbò lórí íńtánẹ́ẹ̀tì",
+      "intermediate": "Ṣàwárí àwọn ẹ̀yà àgbéléwọ̀ àti ìsanwó dígítà",
+      "advanced": "Ran àwọn ẹlòmíràn lọ́wọ́ láti kọ́ ọgbọ́n dígítà"
+    }
+  }
+}

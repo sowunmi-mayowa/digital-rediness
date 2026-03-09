@@ -1,0 +1,137 @@
+{
+  "languageSelection": {
+    "title": "Digital Readiness Test",
+    "subtitle": "Choose Your Language",
+    "continue": "Continue"
+  },
+  "landing": {
+    "title": "Digital Readiness Test",
+    "subtitle": "Check how you sabi use digital things",
+    "startButton": "Start Test",
+    "features": {
+      "title": "Wetin We Dey Check",
+      "phoneSkills": "Phone Skills",
+      "phoneSkillsDesc": "How you fit use phone well well",
+      "internetKnowledge": "Internet Knowledge",
+      "internetKnowledgeDesc": "How you sabi online tings",
+      "onlineSafety": "Online Safety",
+      "onlineSafetyDesc": "How to protect yourself for online",
+      "digitalPayments": "Digital Payment",
+      "digitalPaymentsDesc": "How to do payment for online"
+    },
+    "howItWorks": {
+      "title": "How E Dey Work",
+      "step1": "Do simple phone tasks",
+      "step1Desc": "Test your phone skills",
+      "step2": "Answer digital knowledge questions",
+      "step2Desc": "Show wetin you sabi about digital",
+      "step3": "Get Your Digital Readiness Score",
+      "step3Desc": "See your result and advice"
+    }
+  },
+  "userInfo": {
+    "title": "Your Information",
+    "subtitle": "Tell us about yourself",
+    "name": "Name (If you wan)",
+    "namePlaceholder": "Put your name",
+    "ageRange": "How Old You Be",
+    "ageRangePlaceholder": "Choose how old you be",
+    "educationLevel": "Your School Level",
+    "educationLevelPlaceholder": "Choose your school level",
+    "location": "Where You Dey",
+    "locationPlaceholder": "Put where you dey",
+    "continue": "Continue",
+    "ageRanges": {
+      "18-24": "18-24 years",
+      "25-34": "25-34 years",
+      "35-44": "35-44 years",
+      "45-54": "45-54 years",
+      "55+": "55+ years"
+    },
+    "educationLevels": {
+      "none": "I no go school",
+      "primary": "Primary school",
+      "secondary": "Secondary school",
+      "tertiary": "College/University",
+      "postgraduate": "Master/PhD"
+    }
+  },
+  "tasks": {
+    "title": "Phone Skills Test",
+    "task1": {
+      "title": "Scroll Test",
+      "instruction": "Scroll down make you find the Continue button"
+    },
+    "task2": {
+      "title": "Tap Test",
+      "instruction": "Press the blue circle"
+    },
+    "task3": {
+      "title": "Navigation Test",
+      "instruction": "Open the Messages screen"
+    },
+    "task4": {
+      "title": "Multi-Step Test",
+      "instruction": "Open Settings and press WiFi"
+    },
+    "task5": {
+      "title": "Form Test",
+      "instruction": "Put your age and press submit"
+    },
+    "continue": "Continue",
+    "submit": "Submit",
+    "next": "Next Task",
+    "taskComplete": "Task Don Complete!",
+    "messages": "Messages",
+    "camera": "Camera",
+    "settings": "Settings",
+    "wifi": "WiFi",
+    "bluetooth": "Bluetooth",
+    "display": "Display",
+    "ageLabel": "Your Age",
+    "agePlaceholder": "Put your age"
+  },
+  "questions": {
+    "title": "Digital Knowledge Test",
+    "subtitle": "Answer these questions",
+    "questionOf": "Question {{current}} out of {{total}}",
+    "next": "Next",
+    "finish": "Finish",
+    "submit": "Submit Answer"
+  },
+  "results": {
+    "title": "Your Result",
+    "scoreLabel": "Digital Readiness Score",
+    "level": "Level",
+    "operational": "Phone Skills",
+    "knowledge": "Digital Knowledge",
+    "strengths": "Wetin You Sabi Well",
+    "weaknesses": "Where You Fit Improve",
+    "recommendations": "Advice",
+    "restart": "Do Test Again",
+    "levels": {
+      "Beginner": "Beginner",
+      "Basic": "Basic",
+      "Intermediate": "Intermediate",
+      "Advanced": "Advanced"
+    },
+    "strengthMessages": {
+      "navigation": "You sabi navigate well",
+      "speed": "You quick finish tasks",
+      "accuracy": "You dey press correct",
+      "knowledge": "You sabi digital things well"
+    },
+    "weaknessMessages": {
+      "navigation": "You need practice for navigation",
+      "speed": "Take your time understand the task",
+      "accuracy": "Try dey press more correct",
+      "knowledge": "Learn more about digital things"
+    },
+    "recommendationMessages": {
+      "beginner": "Start with basic phone tutorials and practice every day",
+      "basic": "Continue to practice and learn about online safety",
+      "intermediate": "Try advanced features and digital payments",
+      "advanced": "Help others learn digital skills"
+    }
+  }
+}

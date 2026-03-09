@@ -1,0 +1,137 @@
+{
+  "languageSelection": {
+    "title": "Nyocha Njikere Dijitalụ",
+    "subtitle": "Họrọ Asụsụ Gị",
+    "continue": "Gaa n'ihu"
+  },
+  "landing": {
+    "title": "Nyocha Njikere Dijitalụ",
+    "subtitle": "Tụọ nkà dijitalụ na ihe ọmụma gị",
+    "startButton": "Malite Nyocha",
+    "features": {
+      "title": "Ihe Anyị Na-atụle",
+      "phoneSkills": "Nkà Ekwentị",
+      "phoneSkillsDesc": "Iji ngwaọrụ mkpanaka eme ihe",
+      "internetKnowledge": "Ihe Ọmụma Ịntanetị",
+      "internetKnowledgeDesc": "Ịghọta ọrụ dị n'ịntanetị",
+      "onlineSafety": "Nchekwa N'ịntanetị",
+      "onlineSafetyDesc": "Ichebe njirimara dijitalụ gị",
+      "digitalPayments": "Ịkwụ Ụgwọ Dijitalụ",
+      "digitalPaymentsDesc": "Azụmahịa dị mma n'ịntanetị"
+    },
+    "howItWorks": {
+      "title": "Otu O Si Arụ Ọrụ",
+      "step1": "Mezue ọrụ ekwentị dị mfe",
+      "step1Desc": "Nwalee nkà ekwentị gị",
+      "step2": "Za ajụjụ ihe ọmụma dijitalụ",
+      "step2Desc": "Gosi ihe ọmụma dijitalụ gị",
+      "step3": "Nweta Akara Njikere Dijitalụ Gị",
+      "step3Desc": "Lee nsonaazụ na ndụmọdụ gị"
+    }
+  },
+  "userInfo": {
+    "title": "Ozi Gị",
+    "subtitle": "Gwa anyị banyere onwe gị",
+    "name": "Aha (Ọ Dịghị Mkpa)",
+    "namePlaceholder": "Tinye aha gị",
+    "ageRange": "Afọ Ole",
+    "ageRangePlaceholder": "Họrọ afọ ole ị dị",
+    "educationLevel": "Ọkwa Agụmakwụkwọ",
+    "educationLevelPlaceholder": "Họrọ ọkwa agụmakwụkwọ gị",
+    "location": "Ebe Obibi",
+    "locationPlaceholder": "Tinye ebe obibi gị",
+    "continue": "Gaa n'ihu",
+    "ageRanges": {
+      "18-24": "Afọ 18-24",
+      "25-34": "Afọ 25-34",
+      "35-44": "Afọ 35-44",
+      "45-54": "Afọ 45-54",
+      "55+": "Afọ 55+"
+    },
+    "educationLevels": {
+      "none": "Enweghị agụmakwụkwọ",
+      "primary": "Ụlọ akwụkwọ praịmarị",
+      "secondary": "Ụlọ akwụkwọ sekọndrị",
+      "tertiary": "Kọleji/Mahadum",
+      "postgraduate": "Agụmakwụkwọ dị elu"
+    }
+  },
+  "tasks": {
+    "title": "Nyocha Nkà Ọrụ",
+    "task1": {
+      "title": "Nyocha Mpịakọta",
+      "instruction": "Pịakọta gaa ala ịchọta bọtịnụ Gaa n'ihu"
+    },
+    "task2": {
+      "title": "Nyocha Ịpị Nke Ọma",
+      "instruction": "Pịa okirikiri na-acha anụnụ anụnụ ahụ"
+    },
+    "task3": {
+      "title": "Nyocha Ịgagharị",
+      "instruction": "Meghee ihuenyo Ozi"
+    },
+    "task4": {
+      "title": "Nyocha Nzọụkwụ Ọtụtụ",
+      "instruction": "Meghee Ntọala ma pịa WiFi"
+    },
+    "task5": {
+      "title": "Imecha Fọọmụ",
+      "instruction": "Tinye afọ ole ị dị ma pịa ziga"
+    },
+    "continue": "Gaa n'ihu",
+    "submit": "Ziga",
+    "next": "Ọrụ Ọzọ",
+    "taskComplete": "Emechara Ọrụ!",
+    "messages": "Ozi",
+    "camera": "Igwefoto",
+    "settings": "Ntọala",
+    "wifi": "WiFi",
+    "bluetooth": "Bluetooth",
+    "display": "Ngosipụta",
+    "ageLabel": "Afọ Ole Ị Dị",
+    "agePlaceholder": "Tinye afọ ole ị dị"
+  },
+  "questions": {
+    "title": "Nyocha Ihe Ọmụma Dijitalụ",
+    "subtitle": "Za ajụjụ ndị a",
+    "questionOf": "Ajụjụ nke {{current}} n'ime {{total}}",
+    "next": "Nke Ọzọ",
+    "finish": "Mechaa",
+    "submit": "Ziga Azịza"
+  },
+  "results": {
+    "title": "Nsonaazụ Gị",
+    "scoreLabel": "Akara Njikere Dijitalụ",
+    "level": "Ọkwa",
+    "operational": "Nkà Ọrụ",
+    "knowledge": "Ihe Ọmụma Dijitalụ",
+    "strengths": "Ike",
+    "weaknesses": "Mpaghara Maka Mmelite",
+    "recommendations": "Ndụmọdụ",
+    "restart": "Mee Nyocha Ọzọ",
+    "levels": {
+      "Beginner": "Onye Mbido",
+      "Basic": "Nke Isi",
+      "Intermediate": "Etiti",
+      "Advanced": "Dị Elu"
+    },
+    "strengthMessages": {
+      "navigation": "Nkà ịgagharị dị mma",
+      "speed": "Imecha ọrụ ngwa ngwa",
+      "accuracy": "Ịpị nke ọma dị elu",
+      "knowledge": "Ihe ọmụma dijitalụ siri ike"
+    },
+    "weaknessMessages": {
+      "navigation": "Ịgagharị chọrọ omume",
+      "speed": "Tinye oge karịa ịghọta ọrụ",
+      "accuracy": "Mee ka ịpị nke ọma dịkwuo mma",
+      "knowledge": "Wulite ihe ọmụma dijitalụ"
+    },
+    "recommendationMessages": {
+      "beginner": "Malite na nkuzi ekwentị dị mfe ma na-eme omume kwa ụbọchị",
+      "basic": "Gaa n'ihu na-eme omume ma mụta banyere nchekwa n'ịntanetị",
+      "intermediate": "Nyochaa atụmatụ dị elu na ịkwụ ụgwọ dijitalụ",
+      "advanced": "Nyere ndị ọzọ aka mụta nkà dijitalụ"
+    }
+  }
+}

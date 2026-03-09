@@ -1,0 +1,137 @@
+{
+  "languageSelection": {
+    "title": "Digital Readiness Assessment",
+    "subtitle": "Select Your Language",
+    "continue": "Continue"
+  },
+  "landing": {
+    "title": "Digital Readiness Assessment",
+    "subtitle": "Measure your digital skills and knowledge",
+    "startButton": "Start Assessment",
+    "features": {
+      "title": "What We Assess",
+      "phoneSkills": "Phone Skills",
+      "phoneSkillsDesc": "Basic mobile device operation",
+      "internetKnowledge": "Internet Knowledge",
+      "internetKnowledgeDesc": "Understanding online services",
+      "onlineSafety": "Online Safety",
+      "onlineSafetyDesc": "Protecting your digital identity",
+      "digitalPayments": "Digital Payments",
+      "digitalPaymentsDesc": "Safe online transactions"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": "Complete simple phone tasks",
+      "step1Desc": "Test your basic mobile skills",
+      "step2": "Answer digital knowledge questions",
+      "step2Desc": "Show your digital awareness",
+      "step3": "Get your Digital Readiness Score",
+      "step3Desc": "See your results and recommendations"
+    }
+  },
+  "userInfo": {
+    "title": "Your Information",
+    "subtitle": "Tell us about yourself",
+    "name": "Name (Optional)",
+    "namePlaceholder": "Enter your name",
+    "ageRange": "Age Range",
+    "ageRangePlaceholder": "Select your age range",
+    "educationLevel": "Education Level",
+    "educationLevelPlaceholder": "Select your education level",
+    "location": "Location",
+    "locationPlaceholder": "Enter your location",
+    "continue": "Continue",
+    "ageRanges": {
+      "18-24": "18-24 years",
+      "25-34": "25-34 years",
+      "35-44": "35-44 years",
+      "45-54": "45-54 years",
+      "55+": "55+ years"
+    },
+    "educationLevels": {
+      "none": "No formal education",
+      "primary": "Primary school",
+      "secondary": "Secondary school",
+      "tertiary": "College/University",
+      "postgraduate": "Postgraduate"
+    }
+  },
+  "tasks": {
+    "title": "Operational Skills Test",
+    "task1": {
+      "title": "Scroll Test",
+      "instruction": "Scroll down to find the Continue button"
+    },
+    "task2": {
+      "title": "Tap Accuracy Test",
+      "instruction": "Tap the blue circle"
+    },
+    "task3": {
+      "title": "Navigation Test",
+      "instruction": "Open the Messages screen"
+    },
+    "task4": {
+      "title": "Multi-Step Test",
+      "instruction": "Open Settings and press WiFi"
+    },
+    "task5": {
+      "title": "Form Completion",
+      "instruction": "Enter your age and press submit"
+    },
+    "continue": "Continue",
+    "submit": "Submit",
+    "next": "Next Task",
+    "taskComplete": "Task Complete!",
+    "messages": "Messages",
+    "camera": "Camera",
+    "settings": "Settings",
+    "wifi": "WiFi",
+    "bluetooth": "Bluetooth",
+    "display": "Display",
+    "ageLabel": "Your Age",
+    "agePlaceholder": "Enter your age"
+  },
+  "questions": {
+    "title": "Digital Knowledge Test",
+    "subtitle": "Answer the following questions",
+    "questionOf": "Question {{current}} of {{total}}",
+    "next": "Next",
+    "finish": "Finish",
+    "submit": "Submit Answer"
+  },
+  "results": {
+    "title": "Your Results",
+    "scoreLabel": "Digital Readiness Score",
+    "level": "Level",
+    "operational": "Operational Skills",
+    "knowledge": "Digital Knowledge",
+    "strengths": "Strengths",
+    "weaknesses": "Areas for Improvement",
+    "recommendations": "Recommendations",
+    "restart": "Take Assessment Again",
+    "levels": {
+      "Beginner": "Beginner",
+      "Basic": "Basic",
+      "Intermediate": "Intermediate",
+      "Advanced": "Advanced"
+    },
+    "strengthMessages": {
+      "navigation": "Good navigation skills",
+      "speed": "Fast task completion",
+      "accuracy": "High tap accuracy",
+      "knowledge": "Strong digital knowledge"
+    },
+    "weaknessMessages": {
+      "navigation": "Navigation needs practice",
+      "speed": "Take more time to understand tasks",
+      "accuracy": "Improve tap precision",
+      "knowledge": "Build digital knowledge"
+    },
+    "recommendationMessages": {
+      "beginner": "Start with basic phone tutorials and practice daily",
+      "basic": "Continue practicing and learn about online safety",
+      "intermediate": "Explore advanced features and digital payments",
+      "advanced": "Help others learn digital skills"
+    }
+  }
+}
