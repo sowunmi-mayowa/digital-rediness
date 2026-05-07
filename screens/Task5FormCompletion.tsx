@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { TaskMetrics } from '@/types';
 import { i18n } from '@/services/i18n';
+import { createRun, startWorkflow } from '@/services/mastraApi';
 
 interface Props {
   onComplete: (metrics: TaskMetrics) => void;
@@ -12,9 +20,10 @@ export default function Task5FormCompletion({ onComplete }: Props) {
   const [age, setAge] = useState('');
   const [errors, setErrors] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    if (completed) return;
+  const handleSubmit = async () => {
+    if (completed || loading) return;
 
     const ageNum = parseInt(age, 10);
     if (!age || isNaN(ageNum) || ageNum < 1 || ageNum > 120) {
@@ -34,16 +43,51 @@ export default function Task5FormCompletion({ onComplete }: Props) {
       retries: 0,
       additionalData: { age },
     };
+    // Show loading while creating the personalized questions
+    setLoading(true);
 
-    setCompleted(true);
-    setTimeout(() => onComplete(metrics), 500);
+    // Fire the Mastra create-run API (first step of workflow). Then start workflow and wait for questions.
+    try {
+      const runId = await createRun();
+      console.log('createRun returned runId:', runId);
+
+      let startResult = null;
+      if (runId) {
+        try {
+          // send any needed payload; include basic info like age
+          startResult = await startWorkflow(runId, { age });
+          console.log('startWorkflow returned:', startResult);
+        } catch (err) {
+          console.error('Error calling startWorkflow:', err);
+        }
+      } else {
+        console.warn(
+          'createRun did not return a runId; skipping startWorkflow',
+        );
+      }
+
+      // attach workflow result to metrics for downstream processing
+      metrics.additionalData = {
+        ...metrics.additionalData,
+        workflowResult: startResult,
+        runId: runId,
+      };
+    } catch (e) {
+      console.error('Error calling createRun/startWorkflow:', e);
+    } finally {
+      setLoading(false);
+      setCompleted(true);
+      onComplete(metrics);
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{i18n.t('tasks.task5.title')}</Text>
-        <Text style={styles.instruction}>{i18n.t('tasks.task5.instruction')}</Text>
+        <Text style={styles.instruction}>
+          {i18n.t('tasks.task5.instruction')}
+        </Text>
       </View>
 
       <View style={styles.content}>
@@ -56,15 +100,20 @@ export default function Task5FormCompletion({ onComplete }: Props) {
             placeholder={i18n.t('tasks.agePlaceholder')}
             placeholderTextColor="#999"
             keyboardType="number-pad"
-            editable={!completed}
+            editable={!completed && !loading}
           />
 
           <TouchableOpacity
-            style={[styles.submitButton, completed && styles.submitButtonDisabled]}
+            style={[
+              styles.submitButton,
+              (completed || loading) && styles.submitButtonDisabled,
+            ]}
             onPress={handleSubmit}
-            disabled={completed}
+            disabled={completed || loading}
           >
-            <Text style={styles.submitButtonText}>{i18n.t('tasks.submit')}</Text>
+            <Text style={styles.submitButtonText}>
+              {i18n.t('tasks.submit')}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -78,10 +127,22 @@ export default function Task5FormCompletion({ onComplete }: Props) {
 
         {completed && (
           <View style={styles.successMessage}>
-            <Text style={styles.successText}>{i18n.t('tasks.taskComplete')}</Text>
+            <Text style={styles.successText}>
+              {i18n.t('tasks.taskComplete')}
+            </Text>
           </View>
         )}
       </View>
+
+      {loading && (
+        <View style={styles.loadingOverlay} pointerEvents="none">
+          <ActivityIndicator size="large" color="#2196F3" />
+          <Text style={styles.loadingText}>
+            {i18n.t('tasks.loadingCreatingQuestions') ||
+              "Please hold — we're creating your personalized questions"}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -169,6 +230,24 @@ const styles = StyleSheet.create({
   successText: {
     color: '#2E7D32',
     fontSize: 18,
+    textAlign: 'center',
+    fontWeight: '600',
+  },
+  loadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    padding: 24,
+  },
+  loadingText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginTop: 12,
     textAlign: 'center',
     fontWeight: '600',
   },

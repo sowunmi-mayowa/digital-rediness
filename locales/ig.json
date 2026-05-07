@@ -1,4 +1,5 @@
 {
+  "back": "Laghachi",
   "languageSelection": {
     "title": "Nyocha Njikere Dijitalụ",
     "subtitle": "Họrọ Asụsụ Gị",
@@ -89,7 +90,8 @@
     "bluetooth": "Bluetooth",
     "display": "Ngosipụta",
     "ageLabel": "Afọ Ole Ị Dị",
-    "agePlaceholder": "Tinye afọ ole ị dị"
+    "agePlaceholder": "Tinye afọ ole ị dị",
+    "loadingCreatingQuestions": "Biko duro — anyị na-emepụta ajụjụ ahaziri maka gị"
   },
   "questions": {
     "title": "Nyocha Ihe Ọmụma Dijitalụ",
@@ -132,6 +134,10 @@
       "basic": "Gaa n'ihu na-eme omume ma mụta banyere nchekwa n'ịntanetị",
       "intermediate": "Nyochaa atụmatụ dị elu na ịkwụ ụgwọ dijitalụ",
       "advanced": "Nyere ndị ọzọ aka mụta nkà dijitalụ"
-    }
+    },
+    "improvementRecommendations": "Ntuziaka Mmelite"
+  },
+  "results": {
+    "loadingAnalyzing": "Anyị na-enyocha azịza gị — na-emepụta nsonaazụ gị"
   }
 }

@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { TaskMetrics } from '@/types';
 import { i18n } from '@/services/i18n';
+import { router } from 'expo-router';
 
 interface Props {
   onComplete: (metrics: TaskMetrics) => void;
+  onBack?: () => void;
 }
 
-export default function Task1ScrollTest({ onComplete }: Props) {
+export default function Task1ScrollTest({ onComplete, onBack }: Props) {
   const [startTime] = useState(Date.now());
   const [errors, setErrors] = useState(0);
 
@@ -29,20 +37,41 @@ export default function Task1ScrollTest({ onComplete }: Props) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          if (onBack) onBack();
+          else router.back();
+        }}
+        style={styles.backButton}
+        accessibilityRole="button"
+        hitSlop={{ bottom: 10, right: 10 }}
+      >
+        <Text style={styles.backButtonText}>← {i18n.t('back')}</Text>
+      </TouchableOpacity>
       <View style={styles.header}>
         <Text style={styles.title}>{i18n.t('tasks.task1.title')}</Text>
-        <Text style={styles.instruction}>{i18n.t('tasks.task1.instruction')}</Text>
+        <Text style={styles.instruction}>
+          {i18n.t('tasks.task1.instruction')}
+        </Text>
       </View>
 
-      <ScrollView style={styles.scrollArea} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.scrollArea}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.spacer} />
         <View style={styles.spacer} />
         <View style={styles.spacer} />
         <View style={styles.spacer} />
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.continueButton} onPress={handleComplete}>
-            <Text style={styles.continueButtonText}>{i18n.t('tasks.continue')}</Text>
+          <TouchableOpacity
+            style={styles.continueButton}
+            onPress={handleComplete}
+          >
+            <Text style={styles.continueButtonText}>
+              {i18n.t('tasks.continue')}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -54,6 +83,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+  },
+  backButton: {
+    marginTop: 20,
+    marginLeft: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  backButtonText: {
+    fontSize: 18,
+    color: '#2196F3',
+    fontWeight: '600',
   },
   header: {
     backgroundColor: '#FFFFFF',

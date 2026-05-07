@@ -1,32 +1,63 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { Smartphone, Wifi, Shield, CreditCard } from 'lucide-react-native';
 import { i18n } from '@/services/i18n';
+import { router } from 'expo-router';
 
 interface Props {
   onStartAssessment: () => void;
+  onBack?: () => void;
 }
 
-export default function LandingScreen({ onStartAssessment }: Props) {
+export default function LandingScreen({ onStartAssessment, onBack }: Props) {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <TouchableOpacity
+        onPress={() => {
+          if (onBack) onBack();
+          else router.back();
+        }}
+        style={styles.backButton}
+        accessibilityRole="button"
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
+        <Text style={styles.backButtonText}>← {i18n.t('back')}</Text>
+      </TouchableOpacity>
       <View style={styles.hero}>
         <Text style={styles.heroTitle}>{i18n.t('landing.title')}</Text>
         <Text style={styles.heroSubtitle}>{i18n.t('landing.subtitle')}</Text>
-        <TouchableOpacity style={styles.startButton} onPress={onStartAssessment}>
-          <Text style={styles.startButtonText}>{i18n.t('landing.startButton')}</Text>
+        <TouchableOpacity
+          style={styles.startButton}
+          onPress={onStartAssessment}
+        >
+          <Text style={styles.startButtonText}>
+            {i18n.t('landing.startButton')}
+          </Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{i18n.t('landing.features.title')}</Text>
+        <Text style={styles.sectionTitle}>
+          {i18n.t('landing.features.title')}
+        </Text>
 
         <View style={styles.featuresGrid}>
           <View style={styles.featureCard}>
             <View style={styles.iconContainer}>
               <Smartphone color="#2196F3" size={40} />
             </View>
-            <Text style={styles.featureTitle}>{i18n.t('landing.features.phoneSkills')}</Text>
+            <Text style={styles.featureTitle}>
+              {i18n.t('landing.features.phoneSkills')}
+            </Text>
             <Text style={styles.featureDescription}>
               {i18n.t('landing.features.phoneSkillsDesc')}
             </Text>
@@ -36,7 +67,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
             <View style={styles.iconContainer}>
               <Wifi color="#4CAF50" size={40} />
             </View>
-            <Text style={styles.featureTitle}>{i18n.t('landing.features.internetKnowledge')}</Text>
+            <Text style={styles.featureTitle}>
+              {i18n.t('landing.features.internetKnowledge')}
+            </Text>
             <Text style={styles.featureDescription}>
               {i18n.t('landing.features.internetKnowledgeDesc')}
             </Text>
@@ -46,7 +79,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
             <View style={styles.iconContainer}>
               <Shield color="#FF9800" size={40} />
             </View>
-            <Text style={styles.featureTitle}>{i18n.t('landing.features.onlineSafety')}</Text>
+            <Text style={styles.featureTitle}>
+              {i18n.t('landing.features.onlineSafety')}
+            </Text>
             <Text style={styles.featureDescription}>
               {i18n.t('landing.features.onlineSafetyDesc')}
             </Text>
@@ -56,7 +91,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
             <View style={styles.iconContainer}>
               <CreditCard color="#9C27B0" size={40} />
             </View>
-            <Text style={styles.featureTitle}>{i18n.t('landing.features.digitalPayments')}</Text>
+            <Text style={styles.featureTitle}>
+              {i18n.t('landing.features.digitalPayments')}
+            </Text>
             <Text style={styles.featureDescription}>
               {i18n.t('landing.features.digitalPaymentsDesc')}
             </Text>
@@ -65,7 +102,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{i18n.t('landing.howItWorks.title')}</Text>
+        <Text style={styles.sectionTitle}>
+          {i18n.t('landing.howItWorks.title')}
+        </Text>
 
         <View style={styles.stepsList}>
           <View style={styles.stepItem}>
@@ -73,7 +112,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
               <Text style={styles.stepNumberText}>1</Text>
             </View>
             <View style={styles.stepContent}>
-              <Text style={styles.stepTitle}>{i18n.t('landing.howItWorks.step1')}</Text>
+              <Text style={styles.stepTitle}>
+                {i18n.t('landing.howItWorks.step1')}
+              </Text>
               <Text style={styles.stepDescription}>
                 {i18n.t('landing.howItWorks.step1Desc')}
               </Text>
@@ -85,7 +126,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
               <Text style={styles.stepNumberText}>2</Text>
             </View>
             <View style={styles.stepContent}>
-              <Text style={styles.stepTitle}>{i18n.t('landing.howItWorks.step2')}</Text>
+              <Text style={styles.stepTitle}>
+                {i18n.t('landing.howItWorks.step2')}
+              </Text>
               <Text style={styles.stepDescription}>
                 {i18n.t('landing.howItWorks.step2Desc')}
               </Text>
@@ -97,7 +140,9 @@ export default function LandingScreen({ onStartAssessment }: Props) {
               <Text style={styles.stepNumberText}>3</Text>
             </View>
             <View style={styles.stepContent}>
-              <Text style={styles.stepTitle}>{i18n.t('landing.howItWorks.step3')}</Text>
+              <Text style={styles.stepTitle}>
+                {i18n.t('landing.howItWorks.step3')}
+              </Text>
               <Text style={styles.stepDescription}>
                 {i18n.t('landing.howItWorks.step3Desc')}
               </Text>
@@ -107,8 +152,13 @@ export default function LandingScreen({ onStartAssessment }: Props) {
       </View>
 
       <View style={styles.bottomButton}>
-        <TouchableOpacity style={styles.startButton} onPress={onStartAssessment}>
-          <Text style={styles.startButtonText}>{i18n.t('landing.startButton')}</Text>
+        <TouchableOpacity
+          style={styles.startButton}
+          onPress={onStartAssessment}
+        >
+          <Text style={styles.startButtonText}>
+            {i18n.t('landing.startButton')}
+          </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -116,9 +166,23 @@ export default function LandingScreen({ onStartAssessment }: Props) {
 }
 
 const styles = StyleSheet.create({
+  backButton: {
+    marginTop: 20,
+    marginLeft: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  backButtonText: {
+    fontSize: 18,
+    color: '#2196F3',
+    fontWeight: '600',
+  },
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+    position: 'relative',
   },
   scrollContent: {
     paddingBottom: 40,

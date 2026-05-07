@@ -1,4 +1,5 @@
 {
+  "back": "Back",
   "languageSelection": {
     "title": "Digital Readiness Assessment",
     "subtitle": "Select Your Language",
@@ -89,7 +90,8 @@
     "bluetooth": "Bluetooth",
     "display": "Display",
     "ageLabel": "Your Age",
-    "agePlaceholder": "Enter your age"
+    "agePlaceholder": "Enter your age",
+    "loadingCreatingQuestions": "Please hold — we're creating your personalized questions"
   },
   "questions": {
     "title": "Digital Knowledge Test",
@@ -132,6 +134,10 @@
       "basic": "Continue practicing and learn about online safety",
       "intermediate": "Explore advanced features and digital payments",
       "advanced": "Help others learn digital skills"
-    }
+    },
+    "improvementRecommendations": "Improvement Recommendations"
+  },
+  "results": {
+    "loadingAnalyzing": "Analyzing responses — creating your results"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "back": "Baya",
   "languageSelection": {
     "title": "Gwajin Shirye-shiryen Dijital",
     "subtitle": "Zaɓi Harshenku",
@@ -89,7 +90,8 @@
     "bluetooth": "Bluetooth",
     "display": "Nuni",
     "ageLabel": "Shekarun Ku",
-    "agePlaceholder": "Shigar da shekarun ku"
+    "agePlaceholder": "Shigar da shekarun ku",
+    "loadingCreatingQuestions": "Don Allah jira — muna ƙirƙirar tambayoyinku na musamman"
   },
   "questions": {
     "title": "Gwajin Ilimin Dijital",
@@ -132,6 +134,10 @@
       "basic": "Ci gaba da aiki kuma koyi game da aminci akan layi",
       "intermediate": "Bincika fasaloli masu ci gaba da biyan kuɗi ta dijital",
       "advanced": "Taimaki wasu su koyi ƙwarewar dijital"
-    }
+    },
+    "improvementRecommendations": "Shawarwarin Ingantawa"
+  },
+  "results": {
+    "loadingAnalyzing": "Muna nazarin amsoshinku — ana ƙirƙirar sakamakon ku"
   }
 }

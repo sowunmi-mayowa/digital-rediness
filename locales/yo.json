@@ -1,4 +1,5 @@
 {
+  "back": "Pada",
   "languageSelection": {
     "title": "Ìdánwò Ìmúrasílẹ̀ Dígítà",
     "subtitle": "Yan Èdè Rẹ",
@@ -89,7 +90,8 @@
     "bluetooth": "Bluetooth",
     "display": "Ìfihàn",
     "ageLabel": "Ọjọ́ Orí Rẹ",
-    "agePlaceholder": "Tẹ ọjọ́ orí rẹ sínú"
+    "agePlaceholder": "Tẹ ọjọ́ orí rẹ sínú",
+    "loadingCreatingQuestions": "Jọ̀wọ́ dúró — a ń dá àwọn ìbéèrè tí a ṣe tìrẹ sílẹ̀"
   },
   "questions": {
     "title": "Ìdánwò Ìmọ̀ Dígítà",
@@ -132,6 +134,10 @@
       "basic": "Tẹ̀síwájú láti ṣe àdáṣe kí o sì kọ́ nípa ààbò lórí íńtánẹ́ẹ̀tì",
       "intermediate": "Ṣàwárí àwọn ẹ̀yà àgbéléwọ̀ àti ìsanwó dígítà",
       "advanced": "Ran àwọn ẹlòmíràn lọ́wọ́ láti kọ́ ọgbọ́n dígítà"
-    }
+    },
+    "improvementRecommendations": "Ìmúdára Ìmọ̀ràn"
+  },
+  "results": {
+    "loadingAnalyzing": "A ń ṣe itupalẹ idahun rẹ — a ń ṣe ẹ̀ríèsì rẹ"
   }
 }

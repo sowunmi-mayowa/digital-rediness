@@ -11,12 +11,14 @@ import {
 import { UserProfile } from '@/types';
 import { i18n } from '@/services/i18n';
 import { StorageService } from '@/services/storage';
+import { router } from 'expo-router';
 
 interface Props {
   onComplete: (profile: UserProfile) => void;
+  onBack?: () => void;
 }
 
-export default function UserInfoScreen({ onComplete }: Props) {
+export default function UserInfoScreen({ onComplete, onBack }: Props) {
   const [name, setName] = useState('');
   const [ageRange, setAgeRange] = useState('');
   const [educationLevel, setEducationLevel] = useState('');
@@ -38,6 +40,7 @@ export default function UserInfoScreen({ onComplete }: Props) {
       educationLevel,
       location,
     };
+    console.log(profile);
 
     await StorageService.saveUserProfile(profile);
     onComplete(profile);
@@ -48,6 +51,17 @@ export default function UserInfoScreen({ onComplete }: Props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        <TouchableOpacity
+          onPress={() => {
+            if (onBack) onBack();
+            else router.back();
+          }}
+          style={styles.backButton}
+          accessibilityRole="button"
+          hitSlop={{ bottom: 10, right: 10 }}
+        >
+          <Text style={styles.backButtonText}>← {i18n.t('back')}</Text>
+        </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>{i18n.t('userInfo.title')}</Text>
           <Text style={styles.subtitle}>{i18n.t('userInfo.subtitle')}</Text>
@@ -71,20 +85,33 @@ export default function UserInfoScreen({ onComplete }: Props) {
               style={styles.picker}
               onPress={() => setShowAgePicker(true)}
             >
-              <Text style={[styles.pickerText, !ageRange && styles.placeholderText]}>
-                {ageRange ? ageRanges[ageRange] : i18n.t('userInfo.ageRangePlaceholder')}
+              <Text
+                style={[styles.pickerText, !ageRange && styles.placeholderText]}
+              >
+                {ageRange
+                  ? ageRanges[ageRange]
+                  : i18n.t('userInfo.ageRangePlaceholder')}
               </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>{i18n.t('userInfo.educationLevel')}</Text>
+            <Text style={styles.label}>
+              {i18n.t('userInfo.educationLevel')}
+            </Text>
             <TouchableOpacity
               style={styles.picker}
               onPress={() => setShowEducationPicker(true)}
             >
-              <Text style={[styles.pickerText, !educationLevel && styles.placeholderText]}>
-                {educationLevel ? educationLevels[educationLevel] : i18n.t('userInfo.educationLevelPlaceholder')}
+              <Text
+                style={[
+                  styles.pickerText,
+                  !educationLevel && styles.placeholderText,
+                ]}
+              >
+                {educationLevel
+                  ? educationLevels[educationLevel]
+                  : i18n.t('userInfo.educationLevelPlaceholder')}
               </Text>
             </TouchableOpacity>
           </View>
@@ -104,11 +131,16 @@ export default function UserInfoScreen({ onComplete }: Props) {
 
       <View style={styles.footer}>
         <TouchableOpacity
-          style={[styles.continueButton, !isValid && styles.continueButtonDisabled]}
+          style={[
+            styles.continueButton,
+            !isValid && styles.continueButtonDisabled,
+          ]}
           onPress={handleContinue}
           disabled={!isValid}
         >
-          <Text style={styles.continueButtonText}>{i18n.t('userInfo.continue')}</Text>
+          <Text style={styles.continueButtonText}>
+            {i18n.t('userInfo.continue')}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -143,7 +175,9 @@ export default function UserInfoScreen({ onComplete }: Props) {
           onPress={() => setShowEducationPicker(false)}
         >
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>{i18n.t('userInfo.educationLevel')}</Text>
+            <Text style={styles.modalTitle}>
+              {i18n.t('userInfo.educationLevel')}
+            </Text>
             {Object.keys(educationLevels).map((key) => (
               <TouchableOpacity
                 key={key}
@@ -153,7 +187,9 @@ export default function UserInfoScreen({ onComplete }: Props) {
                   setShowEducationPicker(false);
                 }}
               >
-                <Text style={styles.modalOptionText}>{educationLevels[key]}</Text>
+                <Text style={styles.modalOptionText}>
+                  {educationLevels[key]}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -164,6 +200,19 @@ export default function UserInfoScreen({ onComplete }: Props) {
 }
 
 const styles = StyleSheet.create({
+  backButton: {
+    marginTop: 20,
+    marginLeft: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  backButtonText: {
+    fontSize: 18,
+    color: '#2196F3',
+    fontWeight: '600',
+  },
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',

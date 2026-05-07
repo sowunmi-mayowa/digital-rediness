@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { QuestionAnswer, Language } from '@/types';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import { QuestionAnswer, Language, Question } from '@/types';
 import { i18n } from '@/services/i18n';
 import { getQuestions } from '@/utils/questions';
 import { StorageService } from '@/services/storage';
 
 interface Props {
   onComplete: (answers: QuestionAnswer[]) => void;
+  questionsOverride?: Question[] | null;
 }
 
-export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
+export default function KnowledgeQuestionsScreen({
+  onComplete,
+  questionsOverride,
+}: Props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<QuestionAnswer[]>([]);
@@ -26,12 +36,62 @@ export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
     }
   };
 
-  const questions = getQuestions(language);
+  const questions =
+    questionsOverride && questionsOverride.length > 0
+      ? questionsOverride
+      : getQuestions(language);
+  const isLastQuestion =
+    currentQuestionIndex === Math.max(0, questions.length - 1);
+
+  const handleNoQuestions = async () => {
+    await StorageService.saveQuestionAnswers([]);
+    onComplete([]);
+  };
+
+  if (!questions || questions.length === 0) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>{i18n.t('questions.title')}</Text>
+          <Text style={styles.subtitle}>{i18n.t('questions.subtitle')}</Text>
+        </View>
+        <View
+          style={[
+            styles.content,
+            { justifyContent: 'center', alignItems: 'center' },
+          ]}
+        >
+          <Text style={{ marginBottom: 16 }}>
+            {i18n.t('questions.noQuestions') || 'No questions available.'}
+          </Text>
+          <TouchableOpacity
+            style={styles.nextButton}
+            onPress={handleNoQuestions}
+          >
+            <Text style={styles.nextButtonText}>
+              {i18n.t('questions.finish') || 'Finish'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   const currentQuestion = questions[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   const handleAnswerSelect = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
+  };
+
+  const handleBack = () => {
+    if (currentQuestionIndex === 0) return;
+
+    const prevIndex = currentQuestionIndex - 1;
+    setCurrentQuestionIndex(prevIndex);
+
+    // restore previously selected answer for that question if available
+    const prevAnswer = answers[prevIndex];
+    setSelectedAnswer(prevAnswer ? prevAnswer.selectedAnswer : null);
   };
 
   const handleNext = async () => {
@@ -45,15 +105,24 @@ export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
       isCorrect: selectedAnswer === currentQuestion.correctAnswer,
     };
 
-    const newAnswers = [...answers, answer];
-    setAnswers(newAnswers);
+    // update existing answer at this index if present, otherwise append
+    const updated = [...answers];
+    if (updated.length > currentQuestionIndex) {
+      updated[currentQuestionIndex] = answer;
+    } else {
+      updated.push(answer);
+    }
+    setAnswers(updated);
 
     if (isLastQuestion) {
-      await StorageService.saveQuestionAnswers(newAnswers);
-      onComplete(newAnswers);
+      await StorageService.saveQuestionAnswers(updated);
+      onComplete(updated);
     } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedAnswer(null);
+      const nextIndex = currentQuestionIndex + 1;
+      setCurrentQuestionIndex(nextIndex);
+      // prefill selectedAnswer if user had previously answered that question
+      const nextPrevAnswer = updated[nextIndex];
+      setSelectedAnswer(nextPrevAnswer ? nextPrevAnswer.selectedAnswer : null);
     }
   };
 
@@ -73,14 +142,19 @@ export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
             <View
               style={[
                 styles.progressFill,
-                { width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` },
+                {
+                  width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
+                },
               ]}
             />
           </View>
         </View>
       </View>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.questionCard}>
           <Text style={styles.questionText}>{currentQuestion.question}</Text>
 
@@ -95,17 +169,22 @@ export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
                 onPress={() => handleAnswerSelect(index)}
               >
                 <View style={styles.optionNumber}>
-                  <Text style={[
-                    styles.optionNumberText,
-                    selectedAnswer === index && styles.optionNumberTextSelected,
-                  ]}>
+                  <Text
+                    style={[
+                      styles.optionNumberText,
+                      selectedAnswer === index &&
+                        styles.optionNumberTextSelected,
+                    ]}
+                  >
                     {String.fromCharCode(65 + index)}
                   </Text>
                 </View>
-                <Text style={[
-                  styles.optionText,
-                  selectedAnswer === index && styles.optionTextSelected,
-                ]}>
+                <Text
+                  style={[
+                    styles.optionText,
+                    selectedAnswer === index && styles.optionTextSelected,
+                  ]}
+                >
                   {option}
                 </Text>
               </TouchableOpacity>
@@ -114,14 +193,30 @@ export default function KnowledgeQuestionsScreen({ onComplete }: Props) {
         </View>
       </ScrollView>
 
-      <View style={styles.footer}>
+      <View style={[styles.footer, styles.footerRow]}>
         <TouchableOpacity
-          style={[styles.nextButton, selectedAnswer === null && styles.nextButtonDisabled]}
+          style={[
+            styles.backButton,
+            currentQuestionIndex === 0 && styles.nextButtonDisabled,
+          ]}
+          onPress={handleBack}
+          disabled={currentQuestionIndex === 0}
+        >
+          <Text style={styles.nextButtonText}>{i18n.t('back') || 'Back'}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.nextButton,
+            selectedAnswer === null && styles.nextButtonDisabled,
+          ]}
           onPress={handleNext}
           disabled={selectedAnswer === null}
         >
           <Text style={styles.nextButtonText}>
-            {isLastQuestion ? i18n.t('questions.finish') : i18n.t('questions.next')}
+            {isLastQuestion
+              ? i18n.t('questions.finish')
+              : i18n.t('questions.next')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -251,5 +346,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+  },
+  backButton: {
+    backgroundColor: '#2196F3',
+    padding: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    minWidth: 120,
+  },
+  footerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
   },
 });

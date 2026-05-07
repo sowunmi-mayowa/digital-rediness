@@ -1,4 +1,5 @@
 {
+  "back": "Go Back",
   "languageSelection": {
     "title": "Digital Readiness Test",
     "subtitle": "Choose Your Language",
@@ -89,7 +90,8 @@
     "bluetooth": "Bluetooth",
     "display": "Display",
     "ageLabel": "Your Age",
-    "agePlaceholder": "Put your age"
+    "agePlaceholder": "Put your age",
+    "loadingCreatingQuestions": "Please hold — we're creating your personalized questions"
   },
   "questions": {
     "title": "Digital Knowledge Test",
@@ -132,6 +134,10 @@
       "basic": "Continue to practice and learn about online safety",
       "intermediate": "Try advanced features and digital payments",
       "advanced": "Help others learn digital skills"
-    }
+    },
+    "improvementRecommendations": "Improvement Recommendations"
+  },
+  "results": {
+    "loadingAnalyzing": "We dey analyze your answers — we dey create your result"
   }
 }
