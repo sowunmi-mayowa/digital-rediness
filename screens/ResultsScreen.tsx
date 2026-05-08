@@ -137,9 +137,7 @@ export default function ResultsScreen({
                   <View
                     style={[styles.listBullet, { backgroundColor: '#4CAF50' }]}
                   />
-                  <Text style={styles.listText}>
-                    {i18n.t(`results.strengthMessages.${strength}`)}
-                  </Text>
+                  <Text style={styles.listText}>{i18n.t(`${strength}`)}</Text>
                 </View>
               ))}
             </View>
@@ -157,9 +155,7 @@ export default function ResultsScreen({
                   <View
                     style={[styles.listBullet, { backgroundColor: '#FF9800' }]}
                   />
-                  <Text style={styles.listText}>
-                    {i18n.t(`results.weaknessMessages.${weakness}`)}
-                  </Text>
+                  <Text style={styles.listText}>{i18n.t(`${weakness}`)}</Text>
                 </View>
               ))}
             </View>
