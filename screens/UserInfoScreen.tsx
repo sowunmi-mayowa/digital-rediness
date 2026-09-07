@@ -12,6 +12,7 @@ import { UserProfile } from '@/types';
 import { i18n } from '@/services/i18n';
 import { StorageService } from '@/services/storage';
 import { router } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface Props {
   onComplete: (profile: UserProfile) => void;
@@ -51,17 +52,22 @@ export default function UserInfoScreen({ onComplete, onBack }: Props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <TouchableOpacity
-          onPress={() => {
-            if (onBack) onBack();
-            else router.back();
-          }}
-          style={styles.backButton}
-          accessibilityRole="button"
-          hitSlop={{ bottom: 10, right: 10 }}
-        >
-          <Text style={styles.backButtonText}>← {i18n.t('back')}</Text>
-        </TouchableOpacity>
+        <View style={styles.nameHeader}>
+          <TouchableOpacity
+            onPress={() => {
+              if (onBack) onBack();
+              else router.back();
+            }}
+            style={styles.backButton}
+            accessibilityRole="button"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="chevron-back-circle" size={32} color="#2196F3" />
+            <Text style={styles.backButtonText}>{i18n.t('back')}</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.appName}>Digital Pulse</Text>
+        </View>
         <View style={styles.header}>
           <Text style={styles.title}>{i18n.t('userInfo.title')}</Text>
           <Text style={styles.subtitle}>{i18n.t('userInfo.subtitle')}</Text>
@@ -200,18 +206,38 @@ export default function UserInfoScreen({ onComplete, onBack }: Props) {
 }
 
 const styles = StyleSheet.create({
-  backButton: {
-    marginTop: 20,
-    marginLeft: 12,
-    paddingVertical: 8,
+  nameHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: '100%',
     paddingHorizontal: 12,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  backButton: {
+    marginTop: 5,
+    marginLeft: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
     borderRadius: 8,
     alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   backButtonText: {
     fontSize: 18,
     color: '#2196F3',
     fontWeight: '600',
+    marginLeft: 8,
+  },
+  appName: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1A1A1A',
+    alignSelf: 'center',
   },
   container: {
     flex: 1,

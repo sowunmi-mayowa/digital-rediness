@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { Language } from '@/types';
 import { i18n } from '@/services/i18n';
 import { StorageService } from '@/services/storage';
+import Entypo from '@expo/vector-icons/Entypo';
 
 interface Props {
   onLanguageSelected: (language: Language) => void;
@@ -34,7 +41,9 @@ export default function LanguageSelectionScreen({ onLanguageSelected }: Props) {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>{i18n.t('languageSelection.title')}</Text>
-          <Text style={styles.subtitle}>{i18n.t('languageSelection.subtitle')}</Text>
+          <Text style={styles.subtitle}>
+            {i18n.t('languageSelection.subtitle')}
+          </Text>
         </View>
 
         <View style={styles.languageList}>
@@ -47,16 +56,21 @@ export default function LanguageSelectionScreen({ onLanguageSelected }: Props) {
               ]}
               onPress={() => handleLanguageSelect(lang.code)}
             >
-              <Text style={[
-                styles.languageName,
-                selectedLanguage === lang.code && styles.languageNameSelected,
-              ]}>
+              <Text
+                style={[
+                  styles.languageName,
+                  selectedLanguage === lang.code && styles.languageNameSelected,
+                ]}
+              >
                 {lang.nativeName}
               </Text>
-              <Text style={[
-                styles.languageSubtext,
-                selectedLanguage === lang.code && styles.languageSubtextSelected,
-              ]}>
+              <Text
+                style={[
+                  styles.languageSubtext,
+                  selectedLanguage === lang.code &&
+                    styles.languageSubtextSelected,
+                ]}
+              >
                 {lang.name}
               </Text>
             </TouchableOpacity>
@@ -65,9 +79,13 @@ export default function LanguageSelectionScreen({ onLanguageSelected }: Props) {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={handleContinue}
+        >
           <Text style={styles.continueButtonText}>
             {i18n.t('languageSelection.continue')}
+            <Entypo name="arrow-right" size={24} color="white" />
           </Text>
         </TouchableOpacity>
       </View>
@@ -147,5 +165,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8,
   },
 });

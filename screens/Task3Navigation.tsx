@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { MessageCircle, Camera, Settings } from 'lucide-react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {
+  MessageCircle,
+  Camera,
+  Settings,
+  Users,
+  Phone,
+  Image,
+  Calendar,
+  MapPin,
+  HelpCircle,
+  User,
+} from 'lucide-react-native';
 import { TaskMetrics } from '@/types';
 import { i18n } from '@/services/i18n';
 
@@ -14,9 +31,61 @@ export default function Task3Navigation({ onComplete }: Props) {
   const [completed, setCompleted] = useState(false);
 
   const menuItems = [
-    { id: 'messages', label: i18n.t('tasks.messages'), icon: MessageCircle, isCorrect: true },
-    { id: 'camera', label: i18n.t('tasks.camera'), icon: Camera, isCorrect: false },
-    { id: 'settings', label: i18n.t('tasks.settings'), icon: Settings, isCorrect: false },
+    {
+      id: 'messages',
+      label: i18n.t('tasks.messages'),
+      icon: MessageCircle,
+      isCorrect: true,
+    },
+    {
+      id: 'camera',
+      label: i18n.t('tasks.camera'),
+      icon: Camera,
+      isCorrect: false,
+    },
+    {
+      id: 'settings',
+      label: i18n.t('tasks.settings'),
+      icon: Settings,
+      isCorrect: false,
+    },
+    {
+      id: 'contacts',
+      label: i18n.t('tasks.contacts'),
+      icon: Users,
+      isCorrect: false,
+    },
+    {
+      id: 'calls',
+      label: i18n.t('tasks.calls'),
+      icon: Phone,
+      isCorrect: false,
+    },
+    {
+      id: 'gallery',
+      label: i18n.t('tasks.gallery'),
+      icon: Image,
+      isCorrect: false,
+    },
+    {
+      id: 'calendar',
+      label: i18n.t('tasks.calendar'),
+      icon: Calendar,
+      isCorrect: false,
+    },
+    { id: 'maps', label: i18n.t('tasks.maps'), icon: MapPin, isCorrect: false },
+    {
+      id: 'help',
+      label: i18n.t('tasks.help'),
+      icon: HelpCircle,
+      isCorrect: false,
+    },
+    {
+      id: 'profile',
+      label: i18n.t('tasks.profile'),
+      icon: User,
+      isCorrect: false,
+    },
   ];
 
   const handleMenuPress = (isCorrect: boolean) => {
@@ -47,10 +116,12 @@ export default function Task3Navigation({ onComplete }: Props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{i18n.t('tasks.task3.title')}</Text>
-        <Text style={styles.instruction}>{i18n.t('tasks.task3.instruction')}</Text>
+        <Text style={styles.instruction}>
+          {i18n.t('tasks.task3.instruction')}
+        </Text>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.menuGrid}>
           {menuItems.map((item) => {
             const IconComponent = item.icon;
@@ -86,10 +157,12 @@ export default function Task3Navigation({ onComplete }: Props) {
 
         {completed && (
           <View style={styles.successMessage}>
-            <Text style={styles.successText}>{i18n.t('tasks.taskComplete')}</Text>
+            <Text style={styles.successText}>
+              {i18n.t('tasks.taskComplete')}
+            </Text>
           </View>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -117,21 +190,24 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 28,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+  scrollContent: {
     padding: 20,
+    paddingBottom: 40,
   },
   menuGrid: {
-    gap: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   menuItem: {
     backgroundColor: '#FFFFFF',
-    padding: 24,
+    padding: 20,
     borderRadius: 16,
     alignItems: 'center',
     borderWidth: 3,
     borderColor: '#E0E0E0',
+    width: '48%', // two items per row
+    marginBottom: 16,
   },
   correctMenuItem: {
     borderColor: '#4CAF50',

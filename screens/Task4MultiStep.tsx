@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Settings, Wifi, Bluetooth, Monitor } from 'lucide-react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {
+  Settings,
+  Wifi,
+  Bluetooth,
+  Monitor,
+  Volume2,
+  Battery,
+  HardDrive,
+  Shield,
+  Info,
+  Eye,
+} from 'lucide-react-native';
 import { TaskMetrics } from '@/types';
 import { i18n } from '@/services/i18n';
 
@@ -14,16 +31,93 @@ export default function Task4MultiStep({ onComplete }: Props) {
   const [navigationMistakes, setNavigationMistakes] = useState(0);
   const [completed, setCompleted] = useState(false);
 
+  // Step 1: Correct = Settings
   const step1Items = [
-    { id: 'settings', label: i18n.t('tasks.settings'), icon: Settings, isCorrect: true },
+    {
+      id: 'settings',
+      label: i18n.t('tasks.settings'),
+      icon: Settings,
+      isCorrect: true,
+    },
     { id: 'wifi', label: i18n.t('tasks.wifi'), icon: Wifi, isCorrect: false },
-    { id: 'bluetooth', label: i18n.t('tasks.bluetooth'), icon: Bluetooth, isCorrect: false },
+    {
+      id: 'bluetooth',
+      label: i18n.t('tasks.bluetooth'),
+      icon: Bluetooth,
+      isCorrect: false,
+    },
+    {
+      id: 'display',
+      label: i18n.t('tasks.display'),
+      icon: Monitor,
+      isCorrect: false,
+    },
+    {
+      id: 'sound',
+      label: i18n.t('tasks.sound'),
+      icon: Volume2,
+      isCorrect: false,
+    },
+    {
+      id: 'battery',
+      label: i18n.t('tasks.battery'),
+      icon: Battery,
+      isCorrect: false,
+    },
+    {
+      id: 'storage',
+      label: i18n.t('tasks.storage'),
+      icon: HardDrive,
+      isCorrect: false,
+    },
+    {
+      id: 'security',
+      label: i18n.t('tasks.security'),
+      icon: Shield,
+      isCorrect: false,
+    },
   ];
 
+  // Step 2: Correct = Wifi
   const step2Items = [
     { id: 'wifi', label: i18n.t('tasks.wifi'), icon: Wifi, isCorrect: true },
-    { id: 'bluetooth', label: i18n.t('tasks.bluetooth'), icon: Bluetooth, isCorrect: false },
-    { id: 'display', label: i18n.t('tasks.display'), icon: Monitor, isCorrect: false },
+    {
+      id: 'bluetooth',
+      label: i18n.t('tasks.bluetooth'),
+      icon: Bluetooth,
+      isCorrect: false,
+    },
+    {
+      id: 'display',
+      label: i18n.t('tasks.display'),
+      icon: Monitor,
+      isCorrect: false,
+    },
+    {
+      id: 'sound',
+      label: i18n.t('tasks.sound'),
+      icon: Volume2,
+      isCorrect: false,
+    },
+    {
+      id: 'battery',
+      label: i18n.t('tasks.battery'),
+      icon: Battery,
+      isCorrect: false,
+    },
+    {
+      id: 'storage',
+      label: i18n.t('tasks.storage'),
+      icon: HardDrive,
+      isCorrect: false,
+    },
+    { id: 'about', label: i18n.t('tasks.about'), icon: Info, isCorrect: false },
+    {
+      id: 'accessibility',
+      label: i18n.t('tasks.accessibility'),
+      icon: Eye,
+      isCorrect: false,
+    },
   ];
 
   const handleItemPress = (isCorrect: boolean) => {
@@ -35,7 +129,6 @@ export default function Task4MultiStep({ onComplete }: Props) {
       } else {
         const completionTime = Date.now();
         const timeTaken = completionTime - startTime;
-
         const metrics: TaskMetrics = {
           taskName: 'Multi-Step Test',
           taskStartTime: startTime,
@@ -45,7 +138,6 @@ export default function Task4MultiStep({ onComplete }: Props) {
           retries: 0,
           navigationMistakes,
         };
-
         setCompleted(true);
         setTimeout(() => onComplete(metrics), 500);
       }
@@ -60,13 +152,17 @@ export default function Task4MultiStep({ onComplete }: Props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{i18n.t('tasks.task4.title')}</Text>
-        <Text style={styles.instruction}>{i18n.t('tasks.task4.instruction')}</Text>
+        <Text style={styles.instruction}>
+          {i18n.t('tasks.task4.instruction')}
+        </Text>
         <View style={styles.stepIndicator}>
-          <Text style={styles.stepText}>Step {step} of 2</Text>
+          <Text style={styles.stepText}>
+            {i18n.t('tasks.step')} {step} {i18n.t('tasks.of')} 2
+          </Text>
         </View>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.menuGrid}>
           {currentItems.map((item) => {
             const IconComponent = item.icon;
@@ -95,17 +191,21 @@ export default function Task4MultiStep({ onComplete }: Props) {
         {navigationMistakes > 0 && !completed && (
           <View style={styles.errorMessage}>
             <Text style={styles.errorText}>
-              {step === 1 ? 'Try again! Open Settings.' : 'Try again! Press WiFi.'}
+              {step === 1
+                ? i18n.t('tasks.trySettings')
+                : i18n.t('tasks.tryWifi')}
             </Text>
           </View>
         )}
 
         {completed && (
           <View style={styles.successMessage}>
-            <Text style={styles.successText}>{i18n.t('tasks.taskComplete')}</Text>
+            <Text style={styles.successText}>
+              {i18n.t('tasks.taskComplete')}
+            </Text>
           </View>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -145,21 +245,24 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#2196F3',
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+  scrollContent: {
     padding: 20,
+    paddingBottom: 40,
   },
   menuGrid: {
-    gap: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   menuItem: {
     backgroundColor: '#FFFFFF',
-    padding: 24,
+    padding: 20,
     borderRadius: 16,
     alignItems: 'center',
     borderWidth: 3,
     borderColor: '#E0E0E0',
+    width: '48%',
+    marginBottom: 16,
   },
   correctMenuItem: {
     borderColor: '#4CAF50',
@@ -172,6 +275,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#1A1A1A',
+    textAlign: 'center',
   },
   errorMessage: {
     marginTop: 32,

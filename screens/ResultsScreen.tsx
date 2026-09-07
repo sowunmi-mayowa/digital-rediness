@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Alert,
+  ActivityIndicator,
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { AssessmentResults } from '@/types';
+import * as Print from 'expo-print';
+import * as Sharing from 'expo-sharing';
+import { AssessmentResults, UserProfile } from '@/types';
 import { i18n } from '@/services/i18n';
 import { ScoringService } from '@/services/scoring';
+import { StorageService } from '@/services/storage';
 
 interface Props {
   results: AssessmentResults;
@@ -23,6 +28,8 @@ export default function ResultsScreen({
 }: Props) {
   const [strengths, setStrengths] = useState<string[]>([]);
   const [weaknesses, setWeaknesses] = useState<string[]>([]);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   // If Mastra provided a readiness result, prefer those values for display
   const finalScore = mastraResult?.readinessScore ?? results.finalScore;
@@ -37,6 +44,12 @@ export default function ResultsScreen({
     [];
 
   useEffect(() => {
+    const loadProfile = async () => {
+      const profile = await StorageService.getUserProfile();
+      setUserProfile(profile);
+    };
+    loadProfile();
+
     // Prefer Mastra-provided strengths/weaknesses when available
     if (mastraResult?.strengths && Array.isArray(mastraResult.strengths)) {
       setStrengths(mastraResult.strengths);
@@ -65,11 +78,260 @@ export default function ResultsScreen({
     return i18n.t(`results.recommendationMessages.${levelKey}`);
   };
 
+  const escapeHtml = (value: unknown) =>
+    String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+  const getLocalizedTexts = () => ({
+    title: i18n.t('results.title'),
+    userInfoTitle: i18n.t('results.userInfoTitle') || 'User Information',
+    name: i18n.t('results.name') || 'Name',
+    ageRange: i18n.t('results.ageRange') || 'Age Range',
+    educationLevel: i18n.t('results.educationLevel') || 'Education Level',
+    location: i18n.t('results.location') || 'Location',
+    scoreLabel: i18n.t('results.scoreLabel'),
+    operational: i18n.t('results.operational'),
+    knowledge: i18n.t('results.knowledge'),
+    strengths: i18n.t('results.strengths'),
+    weaknesses: i18n.t('results.weaknesses'),
+    recommendations: i18n.t('results.recommendations'),
+    improvementRecommendations: i18n.t('results.improvementRecommendations'),
+    levelText: i18n.t(`results.levels.${level}`),
+  });
+
+  const buildResultHtml = () => {
+    const texts = getLocalizedTexts();
+    const translatedStrengths = strengths.map((strength) =>
+      i18n.t(`${strength}`),
+    );
+    const translatedWeaknesses = weaknesses.map((weakness) =>
+      i18n.t(`${weakness}`),
+    );
+    const recommendation = mastraSummary ?? getRecommendation(level);
+
+    const listItems = (items: string[]) =>
+      items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+
+    const profileHtml = userProfile
+      ? `
+        <section>
+          <h2>${escapeHtml(texts.userInfoTitle)}</h2>
+          <div class="profile-grid">
+            <div><span>${escapeHtml(texts.name)}</span><strong>${escapeHtml(userProfile.name || '-')}</strong></div>
+            <div><span>${escapeHtml(texts.ageRange)}</span><strong>${escapeHtml(userProfile.ageRange || '-')}</strong></div>
+            <div><span>${escapeHtml(texts.educationLevel)}</span><strong>${escapeHtml(userProfile.educationLevel || '-')}</strong></div>
+            <div><span>${escapeHtml(texts.location)}</span><strong>${escapeHtml(userProfile.location || '-')}</strong></div>
+          </div>
+        </section>
+      `
+      : '';
+
+    return `
+      <!doctype html>
+      <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <style>
+            body {
+              font-family: Arial, Helvetica, sans-serif;
+              color: #1A1A1A;
+              margin: 32px;
+              line-height: 1.5;
+            }
+            h1 {
+              color: #2196F3;
+              font-size: 28px;
+              text-align: center;
+              margin: 0 0 20px;
+            }
+            h2 {
+              font-size: 18px;
+              border-left: 4px solid #2196F3;
+              padding-left: 10px;
+              margin: 24px 0 12px;
+            }
+            .score-card {
+              border: 1px solid #E0E0E0;
+              border-radius: 16px;
+              padding: 22px;
+              text-align: center;
+              margin-bottom: 20px;
+            }
+            .score {
+              color: ${getScoreColor(finalScore)};
+              font-size: 46px;
+              font-weight: 700;
+              margin: 8px 0;
+            }
+            .level {
+              display: inline-block;
+              background: #2196F3;
+              color: #FFFFFF;
+              padding: 8px 18px;
+              border-radius: 20px;
+              font-weight: 700;
+            }
+            .profile-grid {
+              border: 1px solid #E0E0E0;
+              border-radius: 12px;
+              overflow: hidden;
+            }
+            .profile-grid div {
+              padding: 12px 14px;
+              border-bottom: 1px solid #EEEEEE;
+            }
+            .profile-grid div:last-child {
+              border-bottom: 0;
+            }
+            .profile-grid span {
+              color: #666666;
+              display: block;
+              font-size: 12px;
+              text-transform: uppercase;
+              margin-bottom: 3px;
+            }
+            .breakdown {
+              border: 1px solid #E0E0E0;
+              border-radius: 12px;
+              padding: 14px;
+            }
+            .row {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+            }
+            .bar-bg {
+              background: #E0E0E0;
+              border-radius: 6px;
+              height: 10px;
+              overflow: hidden;
+              margin-bottom: 14px;
+            }
+            .bar-fill {
+              height: 10px;
+              border-radius: 6px;
+            }
+            ul {
+              margin-top: 8px;
+              padding-left: 22px;
+            }
+            li {
+              margin-bottom: 8px;
+            }
+            .recommendation {
+              background: #E3F2FD;
+              border-left: 4px solid #2196F3;
+              border-radius: 10px;
+              padding: 14px;
+            }
+            .generated {
+              color: #777777;
+              font-size: 11px;
+              text-align: center;
+              margin-top: 28px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>${escapeHtml(texts.title)}</h1>
+          ${profileHtml}
+          <section class="score-card">
+            <div>${escapeHtml(texts.scoreLabel)}</div>
+            <div class="score">${escapeHtml(finalScore)}%</div>
+            <div class="level">${escapeHtml(texts.levelText)}</div>
+          </section>
+          <section>
+            <h2>Score Breakdown</h2>
+            <div class="breakdown">
+              <div class="row"><strong>${escapeHtml(texts.operational)}</strong><strong>${escapeHtml(operationalScore)}%</strong></div>
+              <div class="bar-bg"><div class="bar-fill" style="width: ${operationalScore}%; background: ${getScoreColor(operationalScore)};"></div></div>
+              <div class="row"><strong>${escapeHtml(texts.knowledge)}</strong><strong>${escapeHtml(knowledgeScore)}%</strong></div>
+              <div class="bar-bg"><div class="bar-fill" style="width: ${knowledgeScore}%; background: ${getScoreColor(knowledgeScore)};"></div></div>
+            </div>
+          </section>
+          ${
+            translatedStrengths.length > 0
+              ? `<section><h2>${escapeHtml(texts.strengths)}</h2><ul>${listItems(translatedStrengths)}</ul></section>`
+              : ''
+          }
+          ${
+            translatedWeaknesses.length > 0
+              ? `<section><h2>${escapeHtml(texts.weaknesses)}</h2><ul>${listItems(translatedWeaknesses)}</ul></section>`
+              : ''
+          }
+          <section>
+            <h2>${escapeHtml(texts.recommendations)}</h2>
+            <div class="recommendation">${escapeHtml(recommendation)}</div>
+          </section>
+          ${
+            mastraRecommendations.length > 0
+              ? `<section><h2>${escapeHtml(texts.improvementRecommendations)}</h2><ul>${listItems(mastraRecommendations)}</ul></section>`
+              : ''
+          }
+          <p class="generated">Generated on ${escapeHtml(new Date().toLocaleString())}</p>
+        </body>
+      </html>
+    `;
+  };
+
+  const handleDownloadResult = async () => {
+    setIsDownloading(true);
+
+    try {
+      const { uri } = await Print.printToFileAsync({
+        html: buildResultHtml(),
+        base64: false,
+      });
+
+      const canShare = await Sharing.isAvailableAsync();
+      if (!canShare) {
+        Alert.alert(
+          'Download unavailable',
+          'Sharing is not available on this device.',
+        );
+        return;
+      }
+
+      await Sharing.shareAsync(uri, {
+        mimeType: 'application/pdf',
+        dialogTitle: i18n.t('results.downloadPdf') || 'Download result',
+        UTI: 'com.adobe.pdf',
+      });
+    } catch (error) {
+      console.error('Result PDF download error:', error);
+      Alert.alert(
+        i18n.t('errors.generic') || 'Error',
+        i18n.t('results.pdfGenerationFailed') ||
+          'Unable to generate the result PDF.',
+      );
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>{i18n.t('results.title')}</Text>
+          <TouchableOpacity
+            style={styles.downloadButton}
+            onPress={handleDownloadResult}
+            disabled={isDownloading}
+          >
+            {isDownloading ? (
+              <ActivityIndicator color="#FFFFFF" size="small" />
+            ) : (
+              <Text style={styles.downloadButtonText}>
+                {i18n.t('results.downloadPdf') || 'Download PDF'}
+              </Text>
+            )}
+          </TouchableOpacity>
         </View>
 
         <View style={styles.scoreCard}>
@@ -213,12 +475,27 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 24,
+    gap: 14,
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#1A1A1A',
     textAlign: 'center',
+  },
+  downloadButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 14,
+    paddingHorizontal: 18,
+    borderRadius: 12,
+    alignItems: 'center',
+    minHeight: 50,
+    justifyContent: 'center',
+  },
+  downloadButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '700',
   },
   scoreCard: {
     backgroundColor: '#FFFFFF',

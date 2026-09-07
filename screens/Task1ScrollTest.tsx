@@ -9,6 +9,7 @@ import {
 import { TaskMetrics } from '@/types';
 import { i18n } from '@/services/i18n';
 import { router } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface Props {
   onComplete: (metrics: TaskMetrics) => void;
@@ -37,17 +38,22 @@ export default function Task1ScrollTest({ onComplete, onBack }: Props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => {
-          if (onBack) onBack();
-          else router.back();
-        }}
-        style={styles.backButton}
-        accessibilityRole="button"
-        hitSlop={{ bottom: 10, right: 10 }}
-      >
-        <Text style={styles.backButtonText}>← {i18n.t('back')}</Text>
-      </TouchableOpacity>
+      <View style={styles.nameHeader}>
+        <TouchableOpacity
+          onPress={() => {
+            if (onBack) onBack();
+            else router.back();
+          }}
+          style={styles.backButton}
+          accessibilityRole="button"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <Ionicons name="chevron-back-circle" size={32} color="#2196F3" />
+          <Text style={styles.backButtonText}>{i18n.t('back')}</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.appName}>Digital Pulse</Text>
+      </View>
       <View style={styles.header}>
         <Text style={styles.title}>{i18n.t('tasks.task1.title')}</Text>
         <Text style={styles.instruction}>
@@ -84,18 +90,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  backButton: {
-    marginTop: 20,
-    marginLeft: 12,
-    paddingVertical: 8,
+  nameHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: '100%',
     paddingHorizontal: 12,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  backButton: {
+    marginTop: 5,
+    marginLeft: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
     borderRadius: 8,
     alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   backButtonText: {
     fontSize: 18,
     color: '#2196F3',
     fontWeight: '600',
+    marginLeft: 8,
+  },
+  appName: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1A1A1A',
+    alignSelf: 'center',
   },
   header: {
     backgroundColor: '#FFFFFF',
